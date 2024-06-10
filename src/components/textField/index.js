@@ -1,11 +1,20 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import "./textField.css";
 
 const textField = (props) => {
-  console.log(props.label);
+  const changeValue = (event) => {
+    props.changeValue(event.target.value);
+  };
+
   return (
     <div className="text-field">
       <label>{props.label}</label>
-      <input placeholder={props.placeholder} />
+      <input
+        value={props.value}
+        onChange={changeValue}
+        required={props.required}
+        placeholder={props.placeholder}
+      />
     </div>
   );
 };
