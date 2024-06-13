@@ -2,7 +2,10 @@ import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer-main">
+    <footer
+      className="footer-main"
+      style={{ backgroundImage: 'url("/images/fundo.png")' }}
+    >
       <section>
         <ul>
           <li>
