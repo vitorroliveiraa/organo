@@ -1,22 +1,41 @@
 import "./squad.css";
 import Collaborator from "../collaborator";
+import hexToRgba from "hex-to-rgba";
 
-const squad = (props) => {
+const squad = ({ squad, collaborators, remove, changeColor, favorite }) => {
   return (
-    props.collaborators.length > 0 && (
-      <section className="squad" style={{ backgroundColor: props.secondColor }}>
-        <h3 style={{ borderColor: props.primaryColor }}>{props.name}</h3>
+    collaborators.length > 0 && (
+      <section
+        className="squad"
+        style={{
+          backgroundImage: "url(/images/fundo.png)",
+          backgroundColor: hexToRgba(squad.color, "0.5"),
+        }}
+      >
+        <input
+          type="color"
+          className="input-color"
+          value={squad.color}
+          onChange={(event) => changeColor(event.target.value, squad.id)}
+        />
+        <h3 style={{ borderColor: squad.color }}>{squad.name}</h3>
 
         <div className="collaboratorr">
-          {props.collaborators.map((collaborator) => (
-            <Collaborator
-              key={collaborator.nome}
-              nome={collaborator.nome}
-              backgroundColor={props.primaryColor}
-              cargo={collaborator.cargo}
-              imagem={collaborator.imagem}
-            />
-          ))}
+          {collaborators.map((collaborator, index) => {
+            return (
+              <Collaborator
+                id={collaborator.id}
+                key={index}
+                nome={collaborator.nome}
+                backgroundColor={squad.color}
+                cargo={collaborator.cargo}
+                imagem={collaborator.imagem}
+                remove={remove}
+                favorite={favorite}
+                collaborator={collaborator}
+              />
+            );
+          })}
         </div>
       </section>
     )
